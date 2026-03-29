@@ -1,623 +1,417 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--==================== UNICONS ====================-->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
-    <!--==================== SWIPER CSS ====================-->
-    <link rel="stylesheet" href="./packages/css/swiper-bundle.min.css">
-
-    <!--==================== CSS ====================-->
-    <link rel="stylesheet" href="./packages/css/styles.css">
-
-    <title>Nalitha Maphini</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nalitha Maphini — Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    [data-theme="dark"] {
+      --bg: #0a0a0f; --bg2: #111118; --bg3: #16161f;
+      --border: rgba(255,255,255,0.07); --accent: #7c6af7; --accent2: #3ecfcf;
+      --text: #e8e8f0; --muted: #6b6b80; --card: #13131c;
+      --nav-bg: rgba(10,10,15,0.88); --grid-color: rgba(255,255,255,0.04);
+    }
+    [data-theme="light"] {
+      --bg: #f5f5f8; --bg2: #eeeef3; --bg3: #e6e6ec;
+      --border: rgba(0,0,0,0.08); --accent: #5b48e8; --accent2: #0daaaa;
+      --text: #16161f; --muted: #70708a; --card: #ffffff;
+      --nav-bg: rgba(245,245,248,0.92); --grid-color: rgba(0,0,0,0.04);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.3; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 5%; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+    .nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-toggle { width: 44px; height: 24px; background: rgba(124,106,247,0.2); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; position: relative; transition: background 0.3s; flex-shrink: 0; }
+    .theme-toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); transition: transform 0.3s; }
+    [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
+    .theme-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.05em; }
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 4rem; position: relative; overflow: hidden; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(124,106,247,0.1) 0%, transparent 70%); top: 50%; left: 40%; transform: translate(-50%,-50%); pointer-events: none; }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--accent2); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; padding: 0.4rem 1rem; border: 1px solid rgba(62,207,207,0.3); border-radius: 2px; }
+    .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-stack { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+    .hero-stack span { color: var(--accent); }
+    .hero-desc { font-size: 1.1rem; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.6rem; font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-decoration: none; border-radius: 4px; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #9180ff; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    section { padding: 6rem 5%; position: relative; }
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3rem; }
+    #skills { background: var(--bg2); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; transition: border-color 0.2s; }
+    .skill-group:hover { border-color: rgba(124,106,247,0.4); }
+    .skill-group-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.25rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 0.3rem 0.7rem; border-radius: 3px; transition: all 0.2s; }
+    [data-theme="light"] .skill-tag { background: rgba(0,0,0,0.03); }
+    .skill-tag:hover { color: var(--accent); border-color: rgba(124,106,247,0.4); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: all 0.25s; display: flex; flex-direction: column; }
+    .project-card:hover { border-color: rgba(124,106,247,0.5); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+    .project-card.featured { grid-column: span 2; }
+    .project-img-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, var(--bg3) 0%, rgba(124,106,247,0.06) 100%); display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .project-img-placeholder::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 30px 30px; }
+    .project-img-label { position: relative; z-index: 1; background: var(--bg); padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: 3px; }
+    .project-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--border); display: block; }
+    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .tech-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--accent); background: rgba(124,106,247,0.1); border: 1px solid rgba(124,106,247,0.2); padding: 0.2rem 0.5rem; border-radius: 2px; }
+    .project-links { display: flex; gap: 0.75rem; }
+    .project-link { font-size: 0.78rem; font-weight: 700; text-decoration: none; padding: 0.5rem 1rem; border-radius: 3px; transition: all 0.2s; letter-spacing: 0.05em; }
+    .link-live { background: var(--accent); color: white; }
+    .link-live:hover { background: #9180ff; }
+    .link-code { color: var(--muted); border: 1px solid var(--border); }
+    .link-code:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 40% 60%; gap: 4rem; align-items: start; }
+    .about-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 2.5rem; }
+    .about-photo { width: 260px; height: 260px; border-radius: 50%; border: 3px solid var(--accent); overflow: hidden; margin-bottom: 1.25rem; background: var(--bg3); }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .about-identity { margin-bottom: 0.5rem; }
+    .about-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.2rem; }
+    .about-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+    .about-location { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .about-desc p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+    .about-desc p strong { color: var(--text); font-weight: 700; }
+    .contact-wrapper { max-width: 600px; }
+    .contact-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: 6px; text-decoration: none; color: var(--text); transition: all 0.2s; }
+    .contact-item:hover { border-color: rgba(124,106,247,0.5); transform: translateX(4px); }
+    .contact-icon { width: 36px; height: 36px; background: rgba(124,106,247,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-label { font-size: 0.72rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.05em; }
+    .contact-value { font-size: 0.9rem; font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .divider { height: 1px; background: var(--border); margin: 0 5%; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .cursor { position: fixed; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.8rem; }
+      .project-card.featured { grid-column: span 1; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .theme-label { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <!--==================== HEADER ====================-->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">Nalitha Maphini</a>
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list grid">
-                    <li class="nav__item">
-                        <a href="#home" class="nav__link">
-                            <i class="uil uil-estate nav__icon"></i>Home
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#about" class="nav__link">
-                            <i class="uil uil-user nav__icon"></i>About
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#skills" class="nav__link">
-                            <i class="uil uil-file-alt nav__icon"></i>Skills
-                        </a>
-                    </li>
-                    
-                    <li class="nav__item">
-                        <a href="#portfolio" class="nav__link">
-                            <i class="uil uil-scenery nav__icon"></i>Projects
-                        </a>
-                    </li>
-                   
-                </ul>
-                <i class="uil uil-times nav__close" id="nav-close"></i>
-            </div>
-            <div class="nav__btns">
-                <!-- Theme change button -->
+  <div class="cursor" id="cursor"></div>
 
-                <i class="uil uil-moon change-theme" id="theme-button"></i>
+  <nav>
+    <div class="nav-logo">nalitha.dev</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="theme-label" id="theme-label">Light</span>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <a href="https://github.com/pixelm123" target="_blank" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.78rem;">GitHub ↗</a>
+    </div>
+  </nav>
 
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="uil uil-apps"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Available for opportunities · South Africa</div>
+      <h1>Nalitha<br><span>Maphini</span></h1>
+      <div class="hero-stack">
+        <span>.NET</span> · <span>Angular</span> · <span>Spring Boot</span> · <span>Node.js</span> · <span>PHP</span> · <span>PostgreSQL</span> · <span>Docker</span>
+      </div>
+      <p class="hero-desc">Full-stack software developer specialising in backend architecture — building production-grade APIs, real-time systems, and scalable full-stack applications.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="https://github.com/pixelm123" target="_blank" class="btn btn-outline">GitHub</a>
+        <a href="#contact" class="btn btn-outline">Contact</a>
+      </div>
+    </div>
+  </section>
 
-    <!--==================== MAIN ====================-->
-    <main class="main">
-        <!--==================== HOME ====================-->
-        <section class="home section" id="home">
-            <div class="home__container container grid">
-                <div class="home__content grid">
-                    <div class="home__social">
-                        <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="home__social-icon">
-                            <i class="uil uil-linkedin-alt"></i>
-                        </a>
-
-                        <a href="https://github.com/pixelm123" target="_blank" class="home__social-icon">
-                            <i class="uil uil-github-alt"></i>
-                        </a>
-                    </div>
-
-                    <div class="home__img">
-                        <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <mask id="mask0" mask-type="alpha">
-                                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547
-                                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775
-                                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666
-                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                            </mask>
-                            <g mask="url(#mask0)">
-                                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346
-                                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403
-                                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028
-                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                                <image class="home__blob-img" x="" xlink:href="packages/images/me.jpg" />
-                            </g>
-                        </svg>
-                    </div>
-
-                    <div class="home__data">
-                        <h1 class="home__title">Hi, I'm Nalitha</h1>
-                        <h3 class="home__subtitle">SOFTWARE DEVELOPER</h3>
-                        
-
-                        <a href="#contact" class="button button--flex home__button">
-                            Contact Me<i class="uil uil-message button__icon"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="home__scroll">
-                    <a href="#about" class="home__scroll-button button--flex">
-                        <i class="uil uil-mouse-alt home__scroll-mouse"></i>
-                        <span class="home__scroll-name">Scroll Down</span>
-                        <i class="uil uil-arrow-down home__scroll-arrow"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== ABOUT ====================-->
-        <section class="about section" id="about">
-            <h2 class="section__title">About Me</h2>
-            <span class="section__subtitle">My Introduction</span>
-
-            <div class="about__container container grid">
-                <img src="packages/images/Nalita (3).jpg" alt="" class="about__img">
-                <div class="about__data">
-                    <p class="about__description">
-                        I transform concepts into code, blending creativity with problem-solving to craft innovative solutions that breathe life into the digital realm.<br>
-                      
-                    </p>
-
-                    <div class="about__info">
-                        <div>
-                            <span class="about__info-title">Core Values</span>
-                            <span class="about__info-name">Innovation, Collaboration, Excellence</span>
-                        </div>
-                        <div>
-                            <span class="about__info-title">Personal Motto</span>
-                            <span class="about__info-name">Turning Ideas into Reality</span>
-                        </div>
-
-                    </div>
-
-                    <div class="about__buttons">
-                        <a target="_blank" href="https://drive.google.com/file/d/1BGV0PUXk1Hi69R0kNe1TxwXRHAf4IHpX/view?usp=sharing" class="button button--flex">
-                            View CV<i class="uil uil-external-link-alt button__icon"></i>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!--==================== SKILLS ====================-->
-        <section class="skills section" id="skills">
-            <h2 class="section__title">Skills</h2>
-            <span class="section__subtitle">My technical skills</span>
-
-            <div class="skills__container container grid">
-                <!-- Frontend (Web + Mobile) -->
-                <div class="skills__card">
-                    <div class="skills__icon"><i class="fas fa-laptop-code"></i></div>
-                    <h3 class="skills__title">Frontend <i class="fas fa-laptop-code"></i></h3>
-                    <p class="skills__description"><strong>Technologies:</strong> ReactJS/TypeScript, React Native, Next.js</p>
-                    <ul class="skills__description">
-                        <li>Building responsive web applications</li>
-                        <li>Developing user-friendly interfaces</li>
-                        <li>Implementing state management</li>
-                    </ul>
-                </div>
-
-                <!-- Backend -->
-                <div class="skills__card">
-                    <div class="skills__icon"><i class="fas fa-code"></i></div>
-                    <h3 class="skills__title">Backend <i class="fas fa-code"></i></h3>
-                    <p class="skills__description"><strong>Technologies:</strong> NodeJS/Express + TypeScript, NextJS, C# .Net Core, Python Django</p>
-                    <ul class="skills__description">
-                        <li>Creating RESTful APIs</li>
-                        <li>Handling authentication and authorization</li>
-                        <li>Integrating with databases</li>
-                    </ul>
-                </div>
-
-                <!-- Styling -->
-                <div class="skills__card">
-                    <div class="skills__icon"><i class="fas fa-palette"></i></div>
-                    <h3 class="skills__title">Styling <i class="fas fa-palette"></i></h3>
-                    <p class="skills__description"><strong>Technologies:</strong> TailwindCSS, Bootstrap, SCSS, Styled Components, Material UI, etc.</p>
-                    <ul class="skills__description">
-                        <li>Designing visually appealing UIs</li>
-                        <li>Implementing consistent styles across the application</li>
-                        <li>Ensuring accessibility and responsiveness</li>
-                    </ul>
-                </div>
-
-                <!-- Database & APIs -->
-                <div class="skills__card">
-                    <div class="skills__icon"><i class="fas fa-database"></i></div>
-                    <h3 class="skills__title">Database & APIs <i class="fas fa-database"></i></h3>
-                    <p class="skills__description"><strong>Technologies:</strong> MS SQL, MySQL, MongoDB, Firebase</p>
-                    <ul class="skills__description">
-                        <li>Designing and optimizing database schemas</li>
-                        <li>Developing scalable and efficient APIs</li>
-                        <li>Integrating third-party APIs</li>
-                    </ul>
-                </div>
-
-                <!-- Deployment -->
-                <div class="skills__card">
-                    <div class="skills__icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                    <h3 class="skills__title">Deployment <i class="fas fa-cloud-upload-alt"></i></h3>
-                    <p class="skills__description"><strong>Technologies:</strong> Github Actions, Netlify, Firebase Tools, Heroku, etc.</p>
-                    <ul class="skills__description">
-                        <li>Setting up continuous integration and deployment pipelines</li>
-                        <li>Managing cloud infrastructure</li>
-                        <li>Ensuring application scalability and availability</li>
-                    </ul>
-                </div>
-
-                <!-- Containers & Cloud -->
-                <div class="skills__card">
-                    <div class="skills__icon"><i class="fas fa-cloud"></i></div>
-                    <h3 class="skills__title">Containers & Cloud <i class="fas fa-cloud"></i></h3>
-                    <p class="skills__description"><strong>Technologies:</strong> Docker, AWS</p>
-                    <ul class="skills__description">
-                        <li>Containerizing applications for portability</li>
-                        <li>Utilizing cloud services for scalability</li>
-                        <li>Implementing serverless architectures</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-
-
-        <!--==================== PORTFOLIO ====================-->
-        <section class="portfolio section" id="portfolio">
-            <h2 class="section__title">Portfolio</h2>
-            <span class="section__subtitle">Most recent works</span>
-
-            <div class="portfolio__container container swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Project 1: Todo App -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/ToDo.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Todo App</h3>
-                            <p class="portfolio__description">
-                                A task management application built with React and Tailwind CSS. Keep track of your tasks with ease.
-                            </p>
-                            <a href="https://todoapp-taskmaster.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">ReactJS</span>
-                                <span class="tag">Tailwind CSS</span>
-                                <span class="tag">Github API</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 1: Rock paper sciors App -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/rock.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Rock Paper Scissors game </h3>
-                            <p class="portfolio__description">
-                               Built with React 
-                            </p>
-                            <a href="https://rockpaperscissorsgam.netlify.app/" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">ReactJS</span>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: Devs Finder -->
-                    <!--<div class="portfolio__content grid swiper-slide">
-        <img src="./packages/images/DevFinder.png" alt="" class="portfolio__img">
-
-        <div class="portfolio__info">
-            <h3 class="portfolio__title">Devs Finder</h3>
-            <p class="portfolio__description">
-                Devs Finder helps search for developers on GitHub. Developed with Next.js, TypeScript, and Tailwind CSS, it delivers a smooth and efficient user experience.
-            </p>
-            <a href="https://devsfinder1.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                Demo
-                <i class="uil uil-arrow-right button__icon"></i>
-            </a>
-            <div class="portfolio__tags">
-                <span class="tag">Next.js</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Tailwind CSS</span>
-            </div>
+  <section id="skills">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">.NET 10 / C#</span>
+          <span class="skill-tag">NestJS</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">PHP / Laravel</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">WebSockets</span>
+          <span class="skill-tag">Clean Architecture</span>
+          <span class="skill-tag">CQRS / MediatR</span>
+          <span class="skill-tag">JWT Auth</span>
+          <span class="skill-tag">Stripe / Webhooks</span>
+          <span class="skill-tag">Microsoft Graph API</span>
         </div>
-    </div>-->
-                    <!-- Project 3: Language Translation App -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/LaguageTranslation.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Language Translation App</h3>
-                            <p class="portfolio__description">
-                                A language translation web application built with Node.js, HTML, JavaScript, and CSS. Translate text between various languages effortlessly.
-                            </p>
-                            <a href="https://language-translation-app1.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">Node.js</span>
-                                <span class="tag">HTML</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">CSS</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4: Text-to-Speech Web Application -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/TextToSpeech.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Text-to-Speech Web Application</h3>
-                            <p class="portfolio__description">
-                                A highly customizable Text-to-Speech web application built with JavaScript, HTML, CSS, and Node.js. Catering to diverse linguistic needs and ensuring enhanced accessibility for users.
-                            </p>
-                            <a href="https://text-speech-01.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">Node.js</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 11: ExpressEats -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/Flavours.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">ExpressEats</h3>
-                            <p class="portfolio__description">
-                                A platform to where a resturant can showcase thier menu and I a variety of dishes and master your culinary skills.
-                            </p>
-                            <a href="https://flavorspalate.netlify.app/#home" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 11: ExpressEats -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/Findrecipes.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">ExpressEats</h3>
-                            <p class="portfolio__description">
-                                A platform to find recipes with tutorial videos for a seamless cooking experience. Explore a variety of dishes and master your culinary skills.
-                            </p>
-                            <a href="https://expresseat.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 9: Restaurant Food Ordering -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/Resturant.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Restaurant Food Ordering</h3>
-                            <p class="portfolio__description">
-                                Convenient online platform for restaurant food ordering, providing users with an efficient and hassle-free dining experience.
-                            </p>
-                            <a href="https://resturantfoodorder.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 10: Furniture Store -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/Furniture.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Furniture Store</h3>
-                            <p class="portfolio__description">
-                                E-commerce website for a furniture store, featuring responsive design, intuitive UI components, and engaging animated interactions.
-                            </p>
-                            <a href="https://furniturestoree.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 8: Running Car Game -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/CarGame.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Running Car Game</h3>
-                            <p class="portfolio__description">
-                                A fun and engaging running car game built with HTML, CSS, and JavaScript. Race through the city streets, avoiding obstacles and collecting coins for high scores.
-                            </p>
-                            <a href="https://runningcargame.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 9: Blooming Flower -->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="./packages/images/Bloming flower.png" alt="" class="portfolio__img">
-
-                        <div class="portfolio__info">
-                            <h3 class="portfolio__title">Blooming Flower</h3>
-                            <p class="portfolio__description">
-                                Blooming Flower is a showcase of the beauty of blooms, featuring elegant design, vivid imagery, and a user-friendly interface.
-                            </p>
-                            <a href="https://bloomingflower.netlify.app" class="button button--flex button--small portfolio__button" target="_blank">
-                                Demo
-                                <i class="uil uil-arrow-right button__icon"></i>
-                            </a>
-                            <div class="portfolio__tags">
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                                <span class="tag">JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-                <!-- add arrows-->
-                <div class="swiper-button-next">
-                    <i class="uil uil-angle-right-b swiper-portfolio-icon"></i>
-                </div>
-
-                <div class="swiper-button-prev">
-                    <i class="uil uil-angle-left-b swiper-portfolio-icon"></i>
-                </div>
-
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-            </div>
-        </section>
-
-
-        <!--==================== PROJECT IN MIND ====================-->
-        <section class="project section">
-
-            <div class="project__bg">
-                <div class="project__container container grid">
-                    <div class="project__data">
-                        <h2 class="project__title">You have a new project?</h2>
-                        <p class="project__description">Contact me now and get discounts on your Web development projects.</p>
-                        <a href="#contact" class="button button--flex button--white">
-                            Contact me
-                            <i class="uil uil-message project__icon button__icon"></i>
-                        </a>
-
-                    </div>
-                    <!-- <img src="assets/img/project.png" alt="" class="project__img"> -->
-                </div>
-            </div>
-
-        </section>
-
-
-
-        <!--==================== CONTACT ME ====================-->
-        <section class="contact section" id="contact">
-            <h2 class="section__title">Contact me</h2>
-            <span class="section__subtitle">Get in touch</span>
-
-            <div class="contact__container container grid">
-                <div>
-
-
-                    <div class="contact__information">
-                        <i class="uil uil-envelope contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">E-mail</h3>
-                            <span class="contatc__subtitle">lilithamaphini@gmail.com</span>
-                        </div>
-                    </div>
-
-                    <div class="contact__information">
-                        <i class="uil uil-map-marker contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">Location</h3>
-                            <span class="contatc__subtitle">South Africa</span>
-                        </div>
-                    </div>
-                </div>
-
-                <form action="" class="contact__form grid">
-                    <div class="contact__inputs grid">
-                        <div class="contact__content">
-                            <label for="" class="contact__label">Name</label>
-                            <input type="text" class="contact__input">
-                        </div>
-
-                        <div class="contact__content">
-                            <label for="" class="contact__label">E-mail</label>
-                            <input type="email" class="contact__input">
-                        </div>
-                    </div>
-
-                    <div class="contact__content">
-                        <label for="" class="contact__label">Subject</label>
-                        <input type="text" class="contact__input">
-                    </div>
-
-                    <div class="contact__content">
-                        <label for="" class="contact__label">Description</label>
-                        <textarea name="" id="" cols="0" rows="7" class="contact__input"></textarea>
-                    </div>
-
-                    <div>
-                        <a href="#" class="button button--flex">
-                            Send message
-                            <i class="uil uil-message button__icon"></i>
-                        </a>
-                    </div>
-                </form>
-            </div>
-
-        </section>
-    </main>
-
-    <!--==================== FOOTER ====================-->
-    <footer class="footer">
-
-        <div class="footer__bg">
-            <div class="footer__container container grid">
-                <div>
-                    <h1 class="footer__title">Nalitha</h1>
-                    <span class="footer__subtitle">Software Developer</span>
-                </div>
-
-                <ul class="footer__links">
-                    
-                    <li>
-                        <a href="#portfolio" class="footer__link">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#contact" class="footer__link">Contact</a>
-                    </li>
-                </ul>
-
-                <div class="footer__socials">
-
-                    <a href="https://github.com/pixelm123" target="_blank" class="footer__social">
-                        <i class="uil uil-github-alt"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="footer__social">
-                        <i class="uil uil-linkedin-alt"></i>
-                    </a>
-                </div>
-            </div>
-            <p class="footer__copy">&#169; Nalitha. All rights reserved.</p>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Angular 18</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">RxJS</span>
+          <span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3 / SCSS</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">Angular CDK</span>
         </div>
-    </footer>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Data & Caching</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">SQL Server</span>
+          <span class="skill-tag">Entity Framework Core</span>
+          <span class="skill-tag">Prisma ORM</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">Kafka</span>
+          <span class="skill-tag">Hangfire</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">DevOps, CMS & Tooling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Render / Vercel</span>
+          <span class="skill-tag">Git / GitHub / GitLab</span>
+          <span class="skill-tag">CI/CD Pipelines</span>
+          <span class="skill-tag">WordPress</span>
+          <span class="skill-tag">WooCommerce</span>
+          <span class="skill-tag">Power Automate</span>
+          <span class="skill-tag">xUnit / Moq</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!--==================== SCROLL TOP ====================-->
-    <a href="#" class="scrollup" id="scroll-up">
-        <i class="uil uil-arrow-up scrollup__icon"></i>
-    </a>
+  <section id="projects">
+    <div class="section-label">Work</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
 
+      <div class="project-card featured reveal">
+        <img src="packages/images/decisionengine.PNG" alt="Decision Engine" class="project-img">
+        <div class="project-body">
+          <div class="project-title">Decision Engine</div>
+          <p class="project-desc">Real-time collaborative decision-making platform. Groups create rooms, define weighted criteria, score options live via WebSockets, and reach a data-backed consensus. Role-based auth, audit logging, multi-round voting.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Angular 18</span><span class="tech-tag">NestJS</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Socket.io</span><span class="tech-tag">JWT</span><span class="tech-tag">Prisma</span><span class="tech-tag">Docker</span>
+          </div>
+          <div class="project-links">
+            <a href="https://decision-engine-phi.vercel.app" target="_blank" class="project-link link-live">Live Demo</a>
+            <a href="https://github.com/pixelm123/decision-engine" target="_blank" class="project-link link-code">Source Code</a>
+          </div>
+        </div>
+      </div>
 
-    <!--==================== SWIPER JS ====================-->
-    <script src="./packages/js/swiper-bundle.min.js"></script>
+      <div class="project-card reveal">
+        <img src="packages/images/JobTracker.PNG" alt="Job Application Tracker" class="project-img">
+        <div class="project-body">
+          <div class="project-title">Job Application Tracker</div>
+          <p class="project-desc">Full-stack job tracker with Kanban board (Applied → Interview → Offer → Rejected), CV uploads, Redis caching, and Hangfire email reminder background jobs.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Angular</span><span class="tech-tag">.NET 10</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Redis</span><span class="tech-tag">Hangfire</span><span class="tech-tag">Docker</span>
+          </div>
+          <div class="project-links">
+            <a href="https://job-application-tracker-vert-gamma.vercel.app" target="_blank" class="project-link link-live">Live Demo</a>
+            <a href="https://github.com/pixelm123/job-application-tracker" target="_blank" class="project-link link-code">Source Code</a>
+          </div>
+        </div>
+      </div>
 
-    <!--==================== MAIN JS ====================-->
-    <script src="./packages/js/main.js"></script>
+      <div class="project-card reveal">
+        <div class="project-img-placeholder"><span class="project-img-label">Expense Tracker — API</span></div>
+        <div class="project-body">
+          <div class="project-title">Expense Tracker API</div>
+          <p class="project-desc">Production REST API with Clean Architecture and CQRS. JWT auth, budget alert background service, cache invalidation on write, RFC 7807 error handling, and 66 behaviour-focused unit tests.</p>
+          <div class="project-tech">
+            <span class="tech-tag">.NET 10</span><span class="tech-tag">Clean Architecture</span><span class="tech-tag">CQRS</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">xUnit</span><span class="tech-tag">Docker</span>
+          </div>
+          <div class="project-links">
+            <a href="https://expense-tracker-api-vhmi.onrender.com/scalar/v1" target="_blank" class="project-link link-live">API Docs</a>
+            <a href="https://github.com/pixelm123/expense-tracker-api" target="_blank" class="project-link link-code">Source Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img-placeholder"><span class="project-img-label">Payments API — Live</span></div>
+        <div class="project-body">
+          <div class="project-title">Payment & Subscription API</div>
+          <p class="project-desc">Stripe integration with customer creation, subscription lifecycle, and webhook events with signature verification and idempotency. Handles invoice.paid, payment_failed, and cancellation events.</p>
+          <div class="project-tech">
+            <span class="tech-tag">.NET 10</span><span class="tech-tag">Stripe</span><span class="tech-tag">Webhooks</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">JWT</span><span class="tech-tag">Docker</span>
+          </div>
+          <div class="project-links">
+            <a href="https://stripe-payments-api.onrender.com/scalar/v1" target="_blank" class="project-link link-live">API Docs</a>
+            <a href="https://github.com/pixelm123/stripe-payments-api" target="_blank" class="project-link link-code">Source Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <img src="packages/images/furnisherShop.PNG" alt="Furniture Store" class="project-img">
+        <div class="project-body">
+          <div class="project-title">Furniture Store</div>
+          <p class="project-desc">Responsive e-commerce frontend with product listings, cart functionality, and smooth animated interactions.</p>
+          <div class="project-tech">
+            <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://pixelm123.github.io/Furniture-Website/" target="_blank" class="project-link link-live">Live Demo</a>
+            <a href="https://github.com/pixelm123/Furniture-Website" target="_blank" class="project-link link-code">Source Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <img src="packages/images/FlavoursPalate.PNG" alt="FlavorsPalate" class="project-img">
+        <div class="project-body">
+          <div class="project-title">FlavorsPalate</div>
+          <p class="project-desc">Restaurant website with menu showcase, services section, dark mode, and fully responsive mobile layout.</p>
+          <div class="project-tech">
+            <span class="tech-tag">HTML</span><span class="tech-tag">Tailwind CSS</span><span class="tech-tag">JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://pixelm123.github.io/Flavors-Palate-Website/" target="_blank" class="project-link link-live">Live Demo</a>
+            <a href="https://github.com/pixelm123/Flavors-Palate-Website" target="_blank" class="project-link link-code">Source Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-photo"><img src="packages/images/mee.png" alt="Nalitha Maphini"></div>
+        <div class="about-identity">
+          <div class="about-name">Nalitha Maphini</div>
+          <div class="about-title">Full-Stack Developer | .NET • Angular • Spring Boot • PostgreSQL • Redis</div>
+          <div class="about-location">Port Elizabeth, South Africa</div>
+        </div>
+      </div>
+      <div class="about-desc reveal">
+        <p>I'm a <strong>full-stack software developer</strong> currently working as a Software Developer at <strong>Wirk Pty</strong>, where I build and maintain production enterprise systems. I have over 2 years of professional experience working across backend, frontend, and CMS platforms.</p>
+        <p>I work with <strong>C# .NET, Java Spring Boot, PHP, Angular, and WordPress</strong> — delivering features for real-time office management platforms, WooCommerce integrations, and Microsoft Graph API workflows.</p>
+        <p>My main focus is building reliable systems and APIs: clean architecture, caching strategies, event-driven systems, webhook integrations, and scalable full-stack applications.</p>
+        <p>Alongside my professional work, I build full-stack projects that solve real problems, including real-time collaboration tools, job tracking systems with background processing, and subscription/payment integrations.</p>
+      </div>
+    </div>
+    <div class="about-buttons reveal">
+      <a href="https://drive.google.com/file/d/1BGV0PUXk1Hi69R0kNe1TxwXRHAf4IHpX/view?usp=sharing" target="_blank" class="btn btn-outline" style="justify-content:center;">View CV ↗</a>
+      <a href="https://github.com/pixelm123" target="_blank" class="btn btn-outline" style="justify-content:center;">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="btn btn-outline" style="justify-content:center;">LinkedIn ↗</a>
+      <a href="#contact" class="btn btn-outline" style="justify-content:center;">Contact</a>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-wrapper reveal">
+      <p class="contact-desc">Open to full-time roles, contract work, and interesting projects. Based in Port Elizabeth, South Africa — open to remote opportunities. I respond within 24 hours.</p>
+      <div class="contact-links">
+        <a href="mailto:lilithamaphini@gmail.com" class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div><div class="contact-label">Email</div><div class="contact-value">lilithamaphini@gmail.com</div></div>
+        </a>
+        <a href="tel:0788270917" class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="contact-label">Phone</div><div class="contact-value">078 827 0917</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="contact-item">
+          <div class="contact-icon">in</div>
+          <div><div class="contact-label">LinkedIn</div><div class="contact-value">nalitha-maphini-28244625a</div></div>
+        </a>
+        <a href="https://github.com/pixelm123" target="_blank" class="contact-item">
+          <div class="contact-icon">⌥</div>
+          <div><div class="contact-label">GitHub</div><div class="contact-value">github.com/pixelm123</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <footer>
+    <div class="footer-copy">© 2026 Nalitha Maphini · Port Elizabeth, South Africa</div>
+    <div class="footer-links">
+      <a href="https://github.com/pixelm123" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank">LinkedIn</a>
+      <a href="mailto:lilithamaphini@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX - 3 + 'px';
+      cursor.style.top = e.clientY - 3 + 'px';
+    });
+
+    const toggle = document.getElementById('theme-toggle');
+    const label = document.getElementById('theme-label');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', saved);
+    label.textContent = saved === 'dark' ? 'Light' : 'Dark';
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      label.textContent = next === 'dark' ? 'Light' : 'Dark';
+      localStorage.setItem('theme', next);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
 </body>
-
 </html>
