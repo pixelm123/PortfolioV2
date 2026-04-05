@@ -3,415 +3,492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nalitha Maphini — Software Developer</title>
+  <title>Nalitha Maphini - Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     [data-theme="dark"] {
-      --bg: #0a0a0f; --bg2: #111118; --bg3: #16161f;
-      --border: rgba(255,255,255,0.07); --accent: #7c6af7; --accent2: #3ecfcf;
-      --text: #e8e8f0; --muted: #6b6b80; --card: #13131c;
-      --nav-bg: rgba(10,10,15,0.88); --grid-color: rgba(255,255,255,0.04);
+      --bg:      #080709;
+      --bg2:     #0e0c0f;
+      --bg3:     #141118;
+      --card:    #0e0c0f;
+      --b:       rgba(255,248,235,.07);
+      --b2:      rgba(255,248,235,.04);
+      --accent:  #c8922a;
+      --a2:      rgba(200,146,42,.12);
+      --text:    #f4ede0;
+      --sub:     #a09070;
+      --muted:   #5a5040;
+      --dim:     #2a2420;
     }
     [data-theme="light"] {
-      --bg: #f5f5f8; --bg2: #eeeef3; --bg3: #e6e6ec;
-      --border: rgba(0,0,0,0.08); --accent: #5b48e8; --accent2: #0daaaa;
-      --text: #16161f; --muted: #70708a; --card: #ffffff;
-      --nav-bg: rgba(245,245,248,0.92); --grid-color: rgba(0,0,0,0.04);
+      --bg:      #faf8f3;
+      --bg2:     #f3ede2;
+      --bg3:     #ece4d5;
+      --card:    #fff;
+      --b:       rgba(60,40,10,.08);
+      --b2:      rgba(60,40,10,.04);
+      --accent:  #a07020;
+      --a2:      rgba(160,112,32,.09);
+      --text:    #181004;
+      --sub:     #5a4a30;
+      --muted:   #9a8870;
+      --dim:     #d8c8a8;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.3; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 5%; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: background 0.3s; }
-    .nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; color: var(--accent); letter-spacing: 0.05em; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .theme-toggle { width: 44px; height: 24px; background: rgba(124,106,247,0.2); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; position: relative; transition: background 0.3s; flex-shrink: 0; }
-    .theme-toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); transition: transform 0.3s; }
-    [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
-    .theme-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.05em; }
-    .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 4rem; position: relative; overflow: hidden; }
-    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); }
-    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(124,106,247,0.1) 0%, transparent 70%); top: 50%; left: 40%; transform: translate(-50%,-50%); pointer-events: none; }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
-    .hero-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--accent2); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; padding: 0.4rem 1rem; border: 1px solid rgba(62,207,207,0.3); border-radius: 2px; }
-    .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
-    .hero h1 span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-stack { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-    .hero-stack span { color: var(--accent); }
-    .hero-desc { font-size: 1.1rem; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; }
-    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.6rem; font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-decoration: none; border-radius: 4px; transition: all 0.2s; cursor: pointer; border: none; }
-    .btn-primary { background: var(--accent); color: white; }
-    .btn-primary:hover { background: #9180ff; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-    section { padding: 6rem 5%; position: relative; }
-    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3rem; }
-    #skills { background: var(--bg2); }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; transition: border-color 0.2s; }
-    .skill-group:hover { border-color: rgba(124,106,247,0.4); }
-    .skill-group-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.25rem; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .skill-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 0.3rem 0.7rem; border-radius: 3px; transition: all 0.2s; }
-    [data-theme="light"] .skill-tag { background: rgba(0,0,0,0.03); }
-    .skill-tag:hover { color: var(--accent); border-color: rgba(124,106,247,0.4); }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; }
-    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: all 0.25s; display: flex; flex-direction: column; }
-    .project-card:hover { border-color: rgba(124,106,247,0.5); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-    .project-card.featured { grid-column: span 2; }
-    .project-img-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, var(--bg3) 0%, rgba(124,106,247,0.06) 100%); display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-    .project-img-placeholder::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 30px 30px; }
-    .project-img-label { position: relative; z-index: 1; background: var(--bg); padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: 3px; }
-    .project-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--border); display: block; }
-    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-    .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; flex: 1; }
-    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
-    .tech-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--accent); background: rgba(124,106,247,0.1); border: 1px solid rgba(124,106,247,0.2); padding: 0.2rem 0.5rem; border-radius: 2px; }
-    .project-links { display: flex; gap: 0.75rem; }
-    .project-link { font-size: 0.78rem; font-weight: 700; text-decoration: none; padding: 0.5rem 1rem; border-radius: 3px; transition: all 0.2s; letter-spacing: 0.05em; }
-    .link-live { background: var(--accent); color: white; }
-    .link-live:hover { background: #9180ff; }
-    .link-code { color: var(--muted); border: 1px solid var(--border); }
-    .link-code:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-    #about { background: var(--bg2); }
-    .about-grid { display: grid; grid-template-columns: 40% 60%; gap: 4rem; align-items: start; }
-    .about-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 2.5rem; }
-    .about-photo { width: 260px; height: 260px; border-radius: 50%; border: 3px solid var(--accent); overflow: hidden; margin-bottom: 1.25rem; background: var(--bg3); }
-    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    .about-identity { margin-bottom: 0.5rem; }
-    .about-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.2rem; }
-    .about-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.2rem; }
-    .about-location { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 1.25rem; }
-    .about-desc p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
-    .about-desc p strong { color: var(--text); font-weight: 700; }
-    .contact-wrapper { max-width: 600px; }
-    .contact-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: 6px; text-decoration: none; color: var(--text); transition: all 0.2s; }
-    .contact-item:hover { border-color: rgba(124,106,247,0.5); transform: translateX(4px); }
-    .contact-icon { width: 36px; height: 36px; background: rgba(124,106,247,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .contact-label { font-size: 0.72rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.05em; }
-    .contact-value { font-size: 0.9rem; font-weight: 600; }
-    footer { border-top: 1px solid var(--border); padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .footer-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
-    .divider { height: 1px; background: var(--border); margin: 0 5%; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .cursor { position: fixed; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; }
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero h1 { font-size: 2.8rem; }
-      .project-card.featured { grid-column: span 1; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .theme-label { display: none; }
+
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;transition:background .35s,color .35s;}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+    /* cursor */
+    #cdot{position:fixed;width:5px;height:5px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+    #cring{position:fixed;width:28px;height:28px;border:1px solid rgba(200,146,42,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s ease,height .3s ease,border-color .2s;}
+
+    /* nav */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 5.5%;background:rgba(8,7,9,.86);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--b2);transition:background .35s;}
+    [data-theme="light"] nav{background:rgba(250,248,243,.9);}
+    .nl{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--text);}
+    .nl em{color:var(--accent);font-style:normal;}
+    .nlinks{display:flex;gap:2.5rem;list-style:none;}
+    .nlinks a{font-family:'DM Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:color .2s;}
+    .nlinks a:hover{color:var(--text);}
+    .nr{display:flex;align-items:center;gap:.7rem;}
+    .tbtn{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;background:none;border:1px solid var(--b);padding:.35rem .78rem;border-radius:2px;cursor:none;transition:all .2s;}
+    .tbtn:hover{color:var(--text);border-color:var(--muted);}
+    .ncta{font-family:'DM Mono',monospace;font-size:.57rem;background:var(--accent);color:#fff;border:none;padding:.48rem 1.15rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+    .ncta:hover{opacity:.82;}
+
+    /* hero */
+    .hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:0 5.5%;padding-top:7rem;position:relative;overflow:hidden;}
+    .orb{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,var(--a2) 0%,transparent 68%);top:15%;right:0%;pointer-events:none;}
+    .hero-mid{display:flex;flex-direction:column;justify-content:center;}
+    .h-kicker{display:flex;align-items:center;gap:1.1rem;margin-bottom:2.2rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--accent);letter-spacing:.25em;text-transform:uppercase;}
+    .h-kicker::before{content:'';width:30px;height:1px;background:var(--accent);}
+    .h-name{font-family:'DM Serif Display',serif;font-size:clamp(4rem,11vw,10rem);line-height:.9;letter-spacing:-.01em;margin-bottom:2.75rem;}
+    .h-name .dim{color:var(--sub);}
+    .h-foot{display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:end;padding:2.25rem 0;border-top:1px solid var(--b2);}
+    .h-desc{font-size:1rem;color:var(--sub);line-height:1.85;max-width:440px;font-weight:300;}
+    .h-desc strong{color:var(--text);font-weight:400;}
+    .h-btns{display:flex;gap:.85rem;flex-shrink:0;flex-wrap:wrap;align-items:center;}
+    .bg{font-family:'DM Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--b);padding:.56rem 1.1rem;border-radius:2px;transition:all .2s;}
+    .bg:hover{color:var(--text);border-color:var(--muted);}
+    .bf{font-family:'DM Mono',monospace;font-size:.57rem;color:#fff;background:var(--accent);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:.58rem 1.35rem;border-radius:2px;transition:opacity .2s;box-shadow:0 4px 24px var(--a2);}
+    .bf:hover{opacity:.82;}
+
+    /* sections */
+    .sec{padding:8rem 5.5%;}
+    .sa{background:var(--bg2);}
+    .sh{display:flex;align-items:baseline;gap:2rem;margin-bottom:5rem;padding-bottom:1.4rem;border-bottom:1px solid var(--b);}
+    .sn{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--dim);letter-spacing:.18em;}
+    .sr{flex:1;height:1px;background:var(--b);}
+    .st{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,4vw,3.5rem);}
+
+    /* featured project - signature work */
+    .featured{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-bottom:6rem;padding-bottom:6rem;border-bottom:1px solid var(--b);}
+    .feat-left{}
+    .feat-eyebrow{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.2rem;}
+    .feat-name{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin-bottom:1.5rem;}
+    .feat-desc{font-size:.92rem;color:var(--sub);line-height:1.9;margin-bottom:2rem;font-weight:300;}
+    .feat-desc strong{color:var(--text);font-weight:400;}
+    .feat-bullets{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2.25rem;}
+    .fb{display:flex;align-items:baseline;gap:.85rem;font-size:.84rem;color:var(--sub);font-weight:300;line-height:1.6;}
+    .fb::before{content:'—';color:var(--accent);flex-shrink:0;font-size:.7rem;}
+    .feat-tech{display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:1.75rem;}
+    .feat-links{display:flex;gap:.85rem;}
+    .feat-right{}
+    .feat-img{width:100%;border:1px solid var(--b);display:block;filter:grayscale(15%) brightness(.9);transition:filter .4s;}
+    .featured:hover .feat-img{filter:grayscale(0%) brightness(1);}
+    .feat-noimg{width:100%;aspect-ratio:4/3;background:var(--bg3);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;}
+    .feat-noimg span{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;}
+
+    /* project list */
+    .plist{}
+    .prow{display:grid;grid-template-columns:1fr 220px;gap:3rem;align-items:start;padding:2.75rem 0;border-bottom:1px solid var(--b2);transition:padding-left .22s,background .2s;}
+    .prow:first-child{border-top:1px solid var(--b2);}
+    .prow:hover{padding-left:.4rem;}
+    .ptop{display:flex;align-items:center;gap:1rem;margin-bottom:.85rem;flex-wrap:wrap;}
+    .pidx{font-family:'DM Mono',monospace;font-size:.5rem;color:var(--dim);letter-spacing:.15em;}
+    .pname{font-family:'DM Serif Display',serif;font-size:1.4rem;}
+    .plive{font-family:'DM Mono',monospace;font-size:.48rem;color:var(--accent);border:1px solid rgba(200,146,42,.3);padding:.15rem .52rem;border-radius:100px;letter-spacing:.12em;text-transform:uppercase;}
+    .pdesc{font-size:.84rem;color:var(--sub);line-height:1.88;margin-bottom:1.1rem;font-weight:300;}
+    .ptech{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.1rem;}
+    .ptag{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);border:1px solid var(--b);padding:.18rem .6rem;border-radius:2px;}
+    .plinks{display:flex;gap:.8rem;}
+    .plp{font-family:'DM Mono',monospace;font-size:.54rem;color:#fff;background:var(--accent);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.44rem 1rem;border-radius:2px;transition:opacity .2s;}
+    .plp:hover{opacity:.8;}
+    .plg{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid var(--b);padding:.44rem 1rem;border-radius:2px;transition:all .2s;}
+    .plg:hover{color:var(--text);border-color:var(--muted);}
+    .pthumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--b);filter:grayscale(20%) brightness(.88);transition:filter .4s;}
+    .prow:hover .pthumb{filter:grayscale(0%) brightness(1);}
+    .pnoimg{width:100%;aspect-ratio:16/9;background:var(--bg3);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;}
+    .pnoimg span{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;}
+
+    /* professional work */
+    .work-grid{display:grid;grid-template-columns:280px 1fr;gap:5rem;}
+    .work-left{}
+    .work-left-h{font-family:'DM Serif Display',serif;font-size:1.5rem;line-height:1.25;margin-bottom:1.25rem;}
+    .work-left-p{font-size:.86rem;color:var(--sub);line-height:1.9;font-weight:300;}
+    .work-right{}
+    .wblock{padding:2.25rem 0;border-bottom:1px solid var(--b2);}
+    .wblock:first-child{border-top:1px solid var(--b2);}
+    .wdate{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;}
+    .wrole{font-size:1rem;font-weight:500;margin-bottom:.8rem;}
+    .wdesc{font-size:.84rem;color:var(--sub);line-height:1.9;font-weight:300;}
+    .wdesc strong{color:var(--text);font-weight:400;}
+
+    /* about */
+    .about-grid{display:grid;grid-template-columns:5fr 7fr;gap:7rem;align-items:start;}
+    .aphbox{position:relative;}
+    .aph{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;filter:grayscale(8%);}
+    .aphf{width:100%;aspect-ratio:3/4;background:var(--bg3);}
+    .aphcap{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.75rem 1.5rem;background:linear-gradient(transparent,rgba(8,7,9,.92));}
+    [data-theme="light"] .aphcap{background:linear-gradient(transparent,rgba(250,248,243,.92));}
+    .aphn{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:.25rem;}
+    .aphr{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;}
+    .ameta{display:flex;flex-direction:column;gap:.45rem;margin-top:1.6rem;}
+    .ametarow{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.08em;display:flex;align-items:center;gap:.8rem;}
+    .ametarow::before{content:'';width:16px;height:1px;background:var(--dim);flex-shrink:0;}
+    .atext{}
+    .ap{font-size:.92rem;color:var(--sub);line-height:1.95;margin-bottom:1.1rem;font-weight:300;}
+    .ap strong{color:var(--text);font-weight:400;}
+    .abtns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.5rem;}
+
+    /* contact */
+    .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+    .cbig{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.12;margin-bottom:1.6rem;}
+    .csub{font-size:.88rem;color:var(--sub);line-height:1.9;font-weight:300;}
+    .crows{display:flex;flex-direction:column;}
+    .crow{display:flex;align-items:center;gap:1.5rem;padding:1.35rem 0;border-bottom:1px solid var(--b2);text-decoration:none;color:var(--text);transition:padding-left .2s;}
+    .crow:first-child{border-top:1px solid var(--b2);}
+    .crow:hover{padding-left:.45rem;}
+    .crow:hover .carr{color:var(--accent);}
+    .cico{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;width:50px;flex-shrink:0;}
+    .cbody{flex:1;}
+    .clbl{font-family:'DM Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.15rem;}
+    .cval{font-size:.88rem;font-weight:400;}
+    .carr{font-size:.88rem;color:var(--dim);transition:color .2s;}
+
+    footer{border-top:1px solid var(--b);padding:1.75rem 5.5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .fsig{font-family:'DM Serif Display',serif;font-size:.88rem;color:var(--muted);}
+    .flinks{display:flex;gap:2rem;}
+    .flinks a{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--muted);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .2s;}
+    .flinks a:hover{color:var(--accent);}
+
+    .r{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
+    .rl{opacity:0;transform:translateX(-20px);transition:opacity .75s ease,transform .75s ease;}
+    .on{opacity:1!important;transform:translate(0)!important;}
+
+    @media(max-width:960px){
+      .nlinks,.ncta{display:none;}
+      .h-foot{grid-template-columns:1fr;gap:1.5rem;}
+      .h-btns{justify-content:flex-start;}
+      .featured{grid-template-columns:1fr;gap:3rem;}
+      .prow{grid-template-columns:1fr;gap:1.25rem;}
+      .prow .pright{order:-1;}
+      .work-grid{grid-template-columns:1fr;gap:3rem;}
+      .about-grid{grid-template-columns:1fr;gap:3rem;}
+      .cgrid{grid-template-columns:1fr;gap:3rem;}
+      footer{flex-direction:column;}
     }
   </style>
 </head>
 <body>
-  <div class="cursor" id="cursor"></div>
+<div id="cdot"></div><div id="cring"></div>
 
-  <nav>
-    <div class="nav-logo">nalitha.dev</div>
-    <ul class="nav-links">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <span class="theme-label" id="theme-label">Light</span>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
-      <a href="https://github.com/pixelm123" target="_blank" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.78rem;">GitHub ↗</a>
+<nav>
+  <div class="nl">Nalitha<em>.</em></div>
+  <ul class="nlinks">
+    <li><a href="#work">Projects</a></li>
+    <li><a href="#professional">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nr">
+    <button class="tbtn" id="tbtn">☀ Light</button>
+    <a href="#contact" class="ncta">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb" aria-hidden="true"></div>
+  <div class="hero-mid">
+    <div class="h-kicker r">Full-Stack Developer · Port Elizabeth, South Africa</div>
+    <h1 class="h-name r">Nalitha<br><span class="dim">Maphini</span></h1>
+  </div>
+  <div class="h-foot r">
+    <p class="h-desc">I care about <strong>how code is structured</strong> - not just whether it works today. I build backends you can test, change, and trust six months from now.</p>
+    <div class="h-btns">
+      <a href="#work" class="bg">Projects ↓</a>
+      <a href="https://github.com/pixelm123" target="_blank" class="bg">GitHub ↗</a>
+      <a href="#contact" class="bf">Get in Touch</a>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <div class="hero-tag">Available for opportunities · South Africa</div>
-      <h1>Nalitha<br><span>Maphini</span></h1>
-      <div class="hero-stack">
-        <span>.NET</span> · <span>Angular</span> · <span>Spring Boot</span> · <span>Node.js</span> · <span>PHP</span> · <span>PostgreSQL</span> · <span>Docker</span>
-      </div>
-      <p class="hero-desc">Full-stack software developer specialising in backend architecture — building production-grade APIs, real-time systems, and scalable full-stack applications.</p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View Projects →</a>
-        <a href="https://github.com/pixelm123" target="_blank" class="btn btn-outline">GitHub</a>
-        <a href="#contact" class="btn btn-outline">Contact</a>
-      </div>
-    </div>
-  </section>
+<!-- WORK -->
+<section class="sec" id="work">
+  <div class="sh"><span class="sn">01</span><div class="sr"></div><h2 class="st">Selected Work</h2></div>
 
-  <section id="skills">
-    <div class="section-label">Expertise</div>
-    <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-group reveal">
-        <div class="skill-group-title">Backend</div>
-        <div class="skill-tags">
-          <span class="skill-tag">.NET 10 / C#</span>
-          <span class="skill-tag">NestJS</span>
-          <span class="skill-tag">Spring Boot</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">PHP / Laravel</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">WebSockets</span>
-          <span class="skill-tag">Clean Architecture</span>
-          <span class="skill-tag">CQRS / MediatR</span>
-          <span class="skill-tag">JWT Auth</span>
-          <span class="skill-tag">Stripe / Webhooks</span>
-          <span class="skill-tag">Microsoft Graph API</span>
-        </div>
+  <!-- FEATURED -->
+  <div class="featured r">
+    <div class="feat-left">
+      <div class="feat-eyebrow">Signature Project</div>
+      <h3 class="feat-name">Expense Tracker API</h3>
+      <p class="feat-desc">A production REST API I built as a reference for how I think a backend should be structured. Not just a CRUD app - every architectural decision was deliberate and every layer has a clear reason to exist.</p>
+      <div class="feat-bullets">
+        <div class="fb">Clean Architecture - domain logic is completely isolated from infrastructure. You can swap the database without touching a single business rule.</div>
+        <div class="fb">CQRS with MediatR - reads and writes are separated so each operation is independently testable and changes don't bleed into each other.</div>
+        <div class="fb">Background service that monitors budgets and fires alert emails the moment a threshold is crossed.</div>
+        <div class="fb">66 unit tests using xUnit and Moq - every command, every query, edge cases and error paths, not just the happy path.</div>
+        <div class="fb">RFC 7807-compliant error responses throughout, so clients always know exactly what went wrong and why.</div>
       </div>
-      <div class="skill-group reveal">
-        <div class="skill-group-title">Frontend</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Angular 18</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">RxJS</span>
-          <span class="skill-tag">Tailwind CSS</span>
-          <span class="skill-tag">HTML5</span>
-          <span class="skill-tag">CSS3 / SCSS</span>
-          <span class="skill-tag">Responsive Design</span>
-          <span class="skill-tag">Angular CDK</span>
-        </div>
+      <div class="feat-tech">
+        <span class="ptag">.NET 10</span><span class="ptag">Clean Architecture</span><span class="ptag">CQRS / MediatR</span><span class="ptag">PostgreSQL</span><span class="ptag">Redis</span><span class="ptag">Hangfire</span><span class="ptag">xUnit / Moq</span>
       </div>
-      <div class="skill-group reveal">
-        <div class="skill-group-title">Data & Caching</div>
-        <div class="skill-tags">
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">SQL Server</span>
-          <span class="skill-tag">Entity Framework Core</span>
-          <span class="skill-tag">Prisma ORM</span>
-          <span class="skill-tag">Redis</span>
-          <span class="skill-tag">Kafka</span>
-          <span class="skill-tag">Hangfire</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <div class="skill-group-title">DevOps, CMS & Tooling</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Render / Vercel</span>
-          <span class="skill-tag">Git / GitHub / GitLab</span>
-          <span class="skill-tag">CI/CD Pipelines</span>
-          <span class="skill-tag">WordPress</span>
-          <span class="skill-tag">WooCommerce</span>
-          <span class="skill-tag">Power Automate</span>
-          <span class="skill-tag">xUnit / Moq</span>
-        </div>
+      <div class="feat-links">
+        <a href="https://expense-tracker-api-vhmi.onrender.com/scalar/v1" target="_blank" class="plp">API Docs</a>
+        <a href="https://github.com/pixelm123/expense-tracker-api" target="_blank" class="plg">Source Code</a>
       </div>
     </div>
-  </section>
-
-  <section id="projects">
-    <div class="section-label">Work</div>
-    <h2 class="section-title">Featured Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card featured reveal">
-        <img src="packages/images/decisionengine.PNG" alt="Decision Engine" class="project-img">
-        <div class="project-body">
-          <div class="project-title">Decision Engine</div>
-          <p class="project-desc">Real-time collaborative decision-making platform. Groups create rooms, define weighted criteria, score options live via WebSockets, and reach a data-backed consensus. Role-based auth, audit logging, multi-round voting.</p>
-          <div class="project-tech">
-            <span class="tech-tag">Angular 18</span><span class="tech-tag">NestJS</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Socket.io</span><span class="tech-tag">JWT</span><span class="tech-tag">Prisma</span><span class="tech-tag">Docker</span>
-          </div>
-          <div class="project-links">
-            <a href="https://decision-engine-phi.vercel.app" target="_blank" class="project-link link-live">Live Demo</a>
-            <a href="https://github.com/pixelm123/decision-engine" target="_blank" class="project-link link-code">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <img src="packages/images/JobTracker.PNG" alt="Job Application Tracker" class="project-img">
-        <div class="project-body">
-          <div class="project-title">Job Application Tracker</div>
-          <p class="project-desc">Full-stack job tracker with Kanban board (Applied → Interview → Offer → Rejected), CV uploads, Redis caching, and Hangfire email reminder background jobs.</p>
-          <div class="project-tech">
-            <span class="tech-tag">Angular</span><span class="tech-tag">.NET 10</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Redis</span><span class="tech-tag">Hangfire</span><span class="tech-tag">Docker</span>
-          </div>
-          <div class="project-links">
-            <a href="https://job-application-tracker-vert-gamma.vercel.app" target="_blank" class="project-link link-live">Live Demo</a>
-            <a href="https://github.com/pixelm123/job-application-tracker" target="_blank" class="project-link link-code">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-img-placeholder"><span class="project-img-label">Expense Tracker — API</span></div>
-        <div class="project-body">
-          <div class="project-title">Expense Tracker API</div>
-          <p class="project-desc">Production REST API with Clean Architecture and CQRS. JWT auth, budget alert background service, cache invalidation on write, RFC 7807 error handling, and 66 behaviour-focused unit tests.</p>
-          <div class="project-tech">
-            <span class="tech-tag">.NET 10</span><span class="tech-tag">Clean Architecture</span><span class="tech-tag">CQRS</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">xUnit</span><span class="tech-tag">Docker</span>
-          </div>
-          <div class="project-links">
-            <a href="https://expense-tracker-api-vhmi.onrender.com/scalar/v1" target="_blank" class="project-link link-live">API Docs</a>
-            <a href="https://github.com/pixelm123/expense-tracker-api" target="_blank" class="project-link link-code">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-img-placeholder"><span class="project-img-label">Payments API — Live</span></div>
-        <div class="project-body">
-          <div class="project-title">Payment & Subscription API</div>
-          <p class="project-desc">Stripe integration with customer creation, subscription lifecycle, and webhook events with signature verification and idempotency. Handles invoice.paid, payment_failed, and cancellation events.</p>
-          <div class="project-tech">
-            <span class="tech-tag">.NET 10</span><span class="tech-tag">Stripe</span><span class="tech-tag">Webhooks</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">JWT</span><span class="tech-tag">Docker</span>
-          </div>
-          <div class="project-links">
-            <a href="https://stripe-payments-api.onrender.com/scalar/v1" target="_blank" class="project-link link-live">API Docs</a>
-            <a href="https://github.com/pixelm123/stripe-payments-api" target="_blank" class="project-link link-code">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <img src="packages/images/furnisherShop.PNG" alt="Furniture Store" class="project-img">
-        <div class="project-body">
-          <div class="project-title">Furniture Store</div>
-          <p class="project-desc">Responsive e-commerce frontend with product listings, cart functionality, and smooth animated interactions.</p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a href="https://pixelm123.github.io/Furniture-Website/" target="_blank" class="project-link link-live">Live Demo</a>
-            <a href="https://github.com/pixelm123/Furniture-Website" target="_blank" class="project-link link-code">Source Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <img src="packages/images/FlavoursPalate.PNG" alt="FlavorsPalate" class="project-img">
-        <div class="project-body">
-          <div class="project-title">FlavorsPalate</div>
-          <p class="project-desc">Restaurant website with menu showcase, services section, dark mode, and fully responsive mobile layout.</p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML</span><span class="tech-tag">Tailwind CSS</span><span class="tech-tag">JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a href="https://pixelm123.github.io/Flavors-Palate-Website/" target="_blank" class="project-link link-live">Live Demo</a>
-            <a href="https://github.com/pixelm123/Flavors-Palate-Website" target="_blank" class="project-link link-code">Source Code</a>
-          </div>
-        </div>
-      </div>
-
+    <div class="feat-right">
+      <div class="feat-noimg"><span>Expense Tracker API</span></div>
     </div>
-  </section>
+  </div>
 
-  <section id="about">
-    <div class="section-label">Background</div>
-    <h2 class="section-title">About Me</h2>
-    <div class="about-grid">
-      <div class="reveal">
-        <div class="about-photo"><img src="packages/images/mee.png" alt="Nalitha Maphini"></div>
-        <div class="about-identity">
-          <div class="about-name">Nalitha Maphini</div>
-          <div class="about-title">Full-Stack Developer | .NET • Angular • Spring Boot • PostgreSQL • Redis</div>
-          <div class="about-location">Port Elizabeth, South Africa</div>
+  <!-- OTHER PROJECTS -->
+  <div class="plist r">
+
+    <div class="prow">
+      <div class="pleft">
+        <div class="ptop">
+          <span class="pidx">02</span>
+          <div class="pname">Decision Engine</div>
+          <span class="plive">Live</span>
+        </div>
+        <div class="pdesc">Real-time collaborative decision platform. Teams define options, assign weighted criteria, and score live over WebSockets - every participant sees the board update instantly. When scoring closes, the platform surfaces a weighted consensus backed by actual data, not just whoever spoke last. Includes role-based access, multi-round voting, and a full audit trail of every decision made.</div>
+        <div class="ptech"><span class="ptag">Angular 18</span><span class="ptag">NestJS</span><span class="ptag">PostgreSQL</span><span class="ptag">Socket.io</span><span class="ptag">Prisma</span><span class="ptag">JWT</span><span class="ptag">Docker</span></div>
+        <div class="plinks">
+          <a href="https://decision-engine-phi.vercel.app" target="_blank" class="plp">Live Demo</a>
+          <a href="https://github.com/pixelm123/decision-engine" target="_blank" class="plg">Source Code</a>
         </div>
       </div>
-      <div class="about-desc reveal">
-        <p>I'm a <strong>full-stack software developer</strong> currently working as a Software Developer at <strong>Wirk Pty</strong>, where I build and maintain production enterprise systems. I have over 2 years of professional experience working across backend, frontend, and CMS platforms.</p>
-        <p>I work with <strong>C# .NET, Java Spring Boot, PHP, Angular, and WordPress</strong> — delivering features for real-time office management platforms, WooCommerce integrations, and Microsoft Graph API workflows.</p>
-        <p>My main focus is building reliable systems and APIs: clean architecture, caching strategies, event-driven systems, webhook integrations, and scalable full-stack applications.</p>
-        <p>Alongside my professional work, I build full-stack projects that solve real problems, including real-time collaboration tools, job tracking systems with background processing, and subscription/payment integrations.</p>
+      <div class="pright">
+        <img src="packages/images/decisionengine.PNG" alt="Decision Engine" class="pthumb"
+             onerror="this.outerHTML='<div class=pnoimg><span>Decision Engine</span></div>'">
       </div>
     </div>
-    <div class="about-buttons reveal">
-      <a href="packages/pdf/NalithaMaphiniCV.pdf" target="_blank" class="btn btn-outline" style="justify-content:center;">View CV ↗</a>
-      <a href="https://github.com/pixelm123" target="_blank" class="btn btn-outline" style="justify-content:center;">GitHub ↗</a>
-      <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="btn btn-outline" style="justify-content:center;">LinkedIn ↗</a>
-      <a href="#contact" class="btn btn-outline" style="justify-content:center;">Contact</a>
-    </div>
-  </section>
 
-  <section id="contact">
-    <div class="section-label">Get in touch</div>
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-wrapper reveal">
-      <p class="contact-desc">Open to full-time roles, contract work, and interesting projects. Based in Port Elizabeth, South Africa — open to remote opportunities. I respond within 24 hours.</p>
-      <div class="contact-links">
-        <a href="mailto:lilithamaphini@gmail.com" class="contact-item">
-          <div class="contact-icon">✉</div>
-          <div><div class="contact-label">Email</div><div class="contact-value">lilithamaphini@gmail.com</div></div>
-        </a>
-        <a href="tel:0788270917" class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div><div class="contact-label">Phone</div><div class="contact-value">078 827 0917</div></div>
-        </a>
-        <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="contact-item">
-          <div class="contact-icon">in</div>
-          <div><div class="contact-label">LinkedIn</div><div class="contact-value">nalitha-maphini-28244625a</div></div>
-        </a>
-        <a href="https://github.com/pixelm123" target="_blank" class="contact-item">
-          <div class="contact-icon">⌥</div>
-          <div><div class="contact-label">GitHub</div><div class="contact-value">github.com/pixelm123</div></div>
-        </a>
+    <div class="prow">
+      <div class="pleft">
+        <div class="ptop">
+          <span class="pidx">03</span>
+          <div class="pname">Job Application Tracker</div>
+          <span class="plive">Live</span>
+        </div>
+        <div class="pdesc">Kanban-style tracker across four stages - Applied, Interview, Offer, Rejected - with CV uploads, notes, and contact details per role. Redis keeps the board fast. The part I enjoyed most is the Hangfire background job: it runs on a schedule, checks for applications with no recent activity, and sends a reminder email automatically so nothing quietly falls through.</div>
+        <div class="ptech"><span class="ptag">Angular</span><span class="ptag">.NET 10</span><span class="ptag">PostgreSQL</span><span class="ptag">Redis</span><span class="ptag">Hangfire</span><span class="ptag">JWT</span></div>
+        <div class="plinks">
+          <a href="https://job-application-tracker-vert-gamma.vercel.app" target="_blank" class="plp">Live Demo</a>
+          <a href="https://github.com/pixelm123/job-application-tracker" target="_blank" class="plg">Source Code</a>
+        </div>
+      </div>
+      <div class="pright">
+        <img src="packages/images/JobTracker.PNG" alt="Job Tracker" class="pthumb"
+             onerror="this.outerHTML='<div class=pnoimg><span>Job Tracker</span></div>'">
       </div>
     </div>
-  </section>
 
-  <div class="divider"></div>
-
-  <footer>
-    <div class="footer-copy">© 2026 Nalitha Maphini · Port Elizabeth, South Africa</div>
-    <div class="footer-links">
-      <a href="https://github.com/pixelm123" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank">LinkedIn</a>
-      <a href="mailto:lilithamaphini@gmail.com">Email</a>
+    <div class="prow">
+      <div class="pleft">
+        <div class="ptop">
+          <span class="pidx">04</span>
+          <div class="pname">Payment &amp; Subscription API</div>
+          <span class="plive">API</span>
+        </div>
+        <div class="pdesc">Stripe subscription system handling the full lifecycle - customer creation, plan changes, cancellations. The interesting part is the webhook layer: Stripe retries events, so the endpoint uses signature verification to block spoofed requests and idempotency keys to ensure every event is processed exactly once, even if it arrives three times. Each event updates state and triggers the right business logic without side effects.</div>
+        <div class="ptech"><span class="ptag">.NET 10</span><span class="ptag">Stripe SDK</span><span class="ptag">Webhook Events</span><span class="ptag">Idempotency</span><span class="ptag">PostgreSQL</span><span class="ptag">JWT</span></div>
+        <div class="plinks">
+          <a href="https://stripe-payments-api.onrender.com/scalar/v1" target="_blank" class="plp">API Docs</a>
+          <a href="https://github.com/pixelm123/stripe-payments-api" target="_blank" class="plg">Source Code</a>
+        </div>
+      </div>
+      <div class="pright">
+        <div class="pnoimg"><span>Payments API</span></div>
+      </div>
     </div>
-  </footer>
 
-  <script>
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX - 3 + 'px';
-      cursor.style.top = e.clientY - 3 + 'px';
-    });
+    <div class="prow">
+      <div class="pleft">
+        <div class="ptop">
+          <span class="pidx">05</span>
+          <div class="pname">Furniture Store</div>
+          <span class="plive">Live</span>
+        </div>
+        <div class="pdesc">Fully responsive e-commerce frontend - product catalogue, cart, and scroll-triggered animations. No frameworks, no libraries. Just HTML, CSS, and JavaScript doing exactly what they're built for.</div>
+        <div class="ptech"><span class="ptag">HTML5</span><span class="ptag">CSS3</span><span class="ptag">JavaScript</span></div>
+        <div class="plinks">
+          <a href="https://pixelm123.github.io/Furniture-Website/" target="_blank" class="plp">Live Demo</a>
+          <a href="https://github.com/pixelm123/Furniture-Website" target="_blank" class="plg">Source Code</a>
+        </div>
+      </div>
+      <div class="pright">
+        <img src="packages/images/furnisherShop.PNG" alt="Furniture Store" class="pthumb"
+             onerror="this.outerHTML='<div class=pnoimg><span>Furniture Store</span></div>'">
+      </div>
+    </div>
 
-    const toggle = document.getElementById('theme-toggle');
-    const label = document.getElementById('theme-label');
-    const html = document.documentElement;
-    const saved = localStorage.getItem('theme') || 'dark';
-    html.setAttribute('data-theme', saved);
-    label.textContent = saved === 'dark' ? 'Light' : 'Dark';
+    <div class="prow">
+      <div class="pleft">
+        <div class="ptop">
+          <span class="pidx">06</span>
+          <div class="pname">FlavorsPalate</div>
+          <span class="plive">Live</span>
+        </div>
+        <div class="pdesc">Restaurant website with menu, services, dark/light mode, and a responsive layout that holds up on every device. Fast, clean, built without a page builder.</div>
+        <div class="ptech"><span class="ptag">HTML5</span><span class="ptag">Tailwind CSS</span><span class="ptag">JavaScript</span></div>
+        <div class="plinks">
+          <a href="https://pixelm123.github.io/Flavors-Palate-Website/" target="_blank" class="plp">Live Demo</a>
+          <a href="https://github.com/pixelm123/Flavors-Palate-Website" target="_blank" class="plg">Source Code</a>
+        </div>
+      </div>
+      <div class="pright">
+        <img src="packages/images/FlavoursPalate.PNG" alt="FlavorsPalate" class="pthumb"
+             onerror="this.outerHTML='<div class=pnoimg><span>FlavorsPalate</span></div>'">
+      </div>
+    </div>
 
-    toggle.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      label.textContent = next === 'dark' ? 'Light' : 'Dark';
-      localStorage.setItem('theme', next);
-    });
+  </div>
+</section>
 
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+<!-- PROFESSIONAL WORK -->
+<section class="sec sa" id="professional">
+  <div class="sh"><span class="sn">02</span><div class="sr"></div><h2 class="st">Professional Work</h2></div>
+  <div class="work-grid">
+    <div class="rl">
+      <div class="work-left-h">Real systems.<br>Real clients.</div>
+      <p class="work-left-p">This is the work I do day-to-day - building and shipping things that businesses actually depend on. Not demos, not tutorials. Production code.</p>
+    </div>
+    <div class="r">
+      <div class="wblock">
+        <div class="wdate">Jul 2024 – Present</div>
+        <div class="wrole">Junior Software Engineer - Enterprise &amp; Commercial Systems</div>
+        <div class="wdesc">
+          Working across <strong>.NET, Angular, Java Spring Boot, PHP, and WordPress</strong> to build and maintain systems that run in production daily. I've shipped a canteen ordering portal, a real-time internal ticketing system with developer workload tracking, and a company-wide workplace management platform with desk booking and WFH scheduling.<br><br>
+          On the WordPress side I've built several custom plugins from scratch - a Microsoft Graph API integration for calendar-based booking, a vouchers system connected to an external database, an auto-registration plugin, and a bulk import tool - alongside WooCommerce stores and fully custom PHP themes for business-sector clients.<br><br>
+          One of the more satisfying problems: a legacy PHP system with 5-minute page load times. SQL query redesign, targeted indexing, and caching layers brought it to <strong>under 10 seconds</strong> and improved overall database performance by 40%.
+        </div>
+      </div>
+      <div class="wblock">
+        <div class="wdate">Apr – Jun 2024</div>
+        <div class="wrole">Software Development Intern - AI-Powered LMS</div>
+        <div class="wdesc">Contributed to a Learning Management System built on React, ASP.NET Core, and SQL Server. Built accessible frontend components with Tailwind CSS, developed REST APIs with JWT authentication, and tested endpoints with Postman.</div>
+      </div>
+      <div class="wblock">
+        <div class="wdate">2020 – 2023</div>
+        <div class="wrole">Information Technology : Software Development - Nelson Mandela University</div>
+        <div class="wdesc">Graduated with a diploma in IT specialising in Software Development. Progressed from C# fundamentals through data structures, algorithms, MVC, and design patterns.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="sh"><span class="sn">03</span><div class="sr"></div><h2 class="st">About</h2></div>
+  <div class="about-grid">
+    <div class="rl">
+      <div class="aphbox">
+        <img src="packages/images/mee.png" alt="Nalitha Maphini" class="aph"
+             onerror="this.outerHTML='<div class=aphf></div>'">
+        <div class="aphcap">
+          <div class="aphn">Nalitha Maphini</div>
+          <div class="aphr">Full-Stack Developer</div>
+        </div>
+      </div>
+      <div class="ameta">
+        <div class="ametarow">Port Elizabeth, South Africa</div>
+        <div class="ametarow">Open to remote</div>
+        <div class="ametarow">Nelson Mandela University</div>
+      </div>
+    </div>
+    <div class="r">
+      <p class="ap">I'm a full-stack developer who cares more about how code is structured than most people probably should. I graduated from <strong>Nelson Mandela University</strong> and went straight into production work - building systems that real businesses run on every day.</p>
+      <p class="ap">My background covers a lot of ground - .NET backends, Angular frontends, Spring Boot, PHP, custom WordPress plugins - but where I'm most at home is backend architecture. I like the part where you have to decide how things fit together, what belongs where, and what happens when something breaks at 3am.</p>
+      <p class="ap">I write tests. I think about error handling before I think about the happy path. I find the performance problem satisfying to fix. I'm looking for a team where that standard matters and there's room to keep growing.</p>
+      <div class="abtns">
+        <a href="packages/pdf/NalithaMaphiniCV.pdf" target="_blank" class="bf">Download CV</a>
+        <a href="https://github.com/pixelm123" target="_blank" class="bg">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="bg">LinkedIn ↗</a>
+        <a href="https://pixelm123.github.io/PortfolioV2/" target="_blank" class="bg">Portfolio ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec sa" id="contact">
+  <div class="sh"><span class="sn">04</span><div class="sr"></div><h2 class="st">Contact</h2></div>
+  <div class="cgrid">
+    <div class="rl">
+      <p class="cbig">Let's work together.</p>
+      <p class="csub">Open to work, contract work, and interesting projects. Based in Port Elizabeth - open to remote. I reply within 24 hours.</p>
+    </div>
+    <div class="crows r">
+      <a href="mailto:lilithamaphini@gmail.com" class="crow">
+        <div class="cico">Email</div>
+        <div class="cbody"><div class="clbl">Mail</div><div class="cval">lilithamaphini@gmail.com</div></div>
+        <div class="carr">→</div>
+      </a>
+      <a href="tel:0788270917" class="crow">
+        <div class="cico">Phone</div>
+        <div class="cbody"><div class="clbl">Mobile</div><div class="cval">078 827 0917</div></div>
+        <div class="carr">→</div>
+      </a>
+      <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank" class="crow">
+        <div class="cico">Li</div>
+        <div class="cbody"><div class="clbl">LinkedIn</div><div class="cval">nalitha-maphini-28244625a</div></div>
+        <div class="carr">→</div>
+      </a>
+      <a href="https://github.com/pixelm123" target="_blank" class="crow">
+        <div class="cico">Git</div>
+        <div class="cbody"><div class="clbl">GitHub</div><div class="cval">github.com/pixelm123</div></div>
+        <div class="carr">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fsig">Nalitha Maphini · 2026</div>
+  <div class="flinks">
+    <a href="https://github.com/pixelm123" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/nalitha-maphini-28244625a/" target="_blank">LinkedIn</a>
+    <a href="mailto:lilithamaphini@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  const dot=document.getElementById('cdot'),ring=document.getElementById('cring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function t(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='50px';ring.style.height='50px';ring.style.borderColor='rgba(200,146,42,.6)';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='28px';ring.style.height='28px';ring.style.borderColor='rgba(200,146,42,.35)';});
+  });
+  const tb=document.getElementById('tbtn'),html=document.documentElement;
+  const sv=localStorage.getItem('theme')||'dark';
+  html.setAttribute('data-theme',sv);tb.textContent=sv==='dark'?'☀ Light':'☾ Dark';
+  tb.addEventListener('click',()=>{
+    const n=html.getAttribute('data-theme')==='dark'?'light':'dark';
+    html.setAttribute('data-theme',n);tb.textContent=n==='dark'?'☀ Light':'☾ Dark';localStorage.setItem('theme',n);
+  });
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);obs.unobserve(e.target);}});
+  },{threshold:.06});
+  document.querySelectorAll('.r,.rl').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
